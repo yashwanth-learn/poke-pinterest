@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { fetchPokemons } from "../api/fetchPokemons";
 import CardRow from "./CardRow";
 
-export default function PokeHome() {
+export default function PokeHome(props) {
+  const {getMore, setGetMore} = props;
   const [pokemonSets, setPokemonSets] = useState([]);
   const [nextUrl, setNextUrl] = useState("");
   const scrollableDiv = React.createRef();
@@ -15,6 +16,8 @@ export default function PokeHome() {
     console.log("Slicing:", res);
     return res;
   };
+  console.log(getMore);
+  console.log(setGetMore);
   const handleShowMore = () => {
     fetchPoke();
   }
@@ -25,17 +28,12 @@ export default function PokeHome() {
       setPokemonSets(sliceForRows(resp.results));
     });
   }
-  // const renderPokeCardRow = () => {
-  //   pokemonSets.map((pokemonSet) => {
-  //     <CardRow pokemonSet={pokemonSet} />;
-  //   });
-  // };
-  // const handleOnScroll = () => {
-  //  console.log(scrollableDiv.current)
-  // };
   useEffect(() => {
     fetchPoke();
-  }, []);
+    if(getMore){
+      setGetMore();
+    }
+  }, [getMore]);
   return (
     <div>
       <div ref={scrollableDiv} onScroll={() => console.log("Helloooooo")}>
