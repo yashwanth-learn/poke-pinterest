@@ -1,11 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { fetchPokemon } from "../api/fetchPokemons";
+import usePokemon from "../hooks/usePokemon";
+import PokemonContext2 from "../PokemonContext2";
 
 export default function PokeCard(props) {
   const { name } = props;
   const [pokemon, setPokemon] = useState({});
+
+  const { state, setState } = useContext(PokemonContext2);
+  const { deletePokemon, savePokemon } = usePokemon();
+  const handleOnDelete = () => {
+    const updatedDeletedPokemons = state.deletedPokemons;
+    updatedDeletedPokemons.push(pokemon);
+    setState({ ...state, deletedPokemons: updatedDeletedPokemons });
+  };
+  const handleOnSave = () => {
+    savePokemon(pokemon);
+  };
   useEffect(() => {
-    fetchPokemon(name).then((resp) => {
+    fetchPokemon(name).then(resp => {
       // console.log("In card fetch:", resp);
       setPokemon(resp);
     });
@@ -18,8 +31,13 @@ export default function PokeCard(props) {
         width={300}
         height={300}
       />
-      <span><b>{name}</b></span>
-      <span><button>-</button><button>+</button></span>
+      <span>
+        <b>{name}</b>
+      </span>
+      <span>
+        <button onClick={handleOnDelete}>-</button>
+        <button onClick={handleOnSave}>+</button>
+      </span>
     </div>
   );
 }
