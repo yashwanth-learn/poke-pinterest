@@ -1,55 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { fetchPokemons } from "../api/fetchPokemons";
+import React, { useEffect, useState, useContext } from "react";
+import { fetchPokemon } from "../api/fetchPokemons";
 import CardRow from "./CardRow";
-import usePokemon from "../hooks/usePokemon";
-
+import PokemonContext from "../PokemonContext";
+import sliceForRows from "../utils/pokeUtils";
 
 export default function PokeHome(props) {
   const { getMore, setGetMore } = props;
-  const { deletePokemon, savePokemon } = usePokemon();
   const [pokemonSets, setPokemonSets] = useState([]);
-  const [nextUrl, setNextUrl] = useState("");
+  const [pok, setPok] = useState([]);
+  const [nxtId, setNxtId] = useState(1);
   const scrollableDiv = React.createRef();
-  const sliceForRows = arr => {
-    const res = [];
-    for (let i = 0; i < arr.length; i += 3) {
-      const chunk = arr.slice(i, i + 3);
-      res.push(chunk);
+
+  const { state, setState } = useContext(PokemonContext);
+  // const handleShowMore = () => {
+  //   fetchPoke();
+  // };
+  const fetchPoke9 = () => {
+    console.log("Nxt Id in PokeHome:", nxtId);
+    for (let i = nxtId; i <= nxtId + 8; i++) {
+      fetchPokemon(i).then(resp => {
+        console.log("In home fetch:", resp);
+        const qwerty = pok;
+        qwerty.push(resp);
+        setPok(qwerty);
+        setState({ ...state, pokemons: pok });
+        setPokemonSets(sliceForRows(pok));
+      });
     }
-    console.log("Slicing:", res);
-    return res;
+    setNxtId(nxtId + 9);
   };
-  console.log(getMore);
-  console.log(setGetMore);
-  const handleShowMore = () => {
-    fetchPoke();
-  };
-  const fetchPoke = () => {
-    fetchPokemons(nextUrl).then(resp => {
-      console.log("In home fetch:", resp);
-      setNextUrl(resp.next);
-      setPokemonSets(sliceForRows(resp.results));
-    });
-  };
+
   useEffect(() => {
-    fetchPoke();
+    fetchPoke9();
     if (getMore) {
       setGetMore();
     }
   }, [getMore]);
   return (
-    // <PokemonProvider>
     <div>
       <div ref={scrollableDiv}>
         {pokemonSets.map((pokemonSet, index) => {
-          return <CardRow key={index} pokemonSet={pokemonSet} />;
+          return <CardRow key={index} pokemonSet={pokemonSet} parent="home"/>;
         })}
       </div>
-      <div>
-        <button onClick={handleShowMore}>show more</button>
-      </div>
+      <div>{/* <button onClick={handleShowMore}>show more</button> */}</div>
     </div>
-    // </PokemonProvider>
-    // <CardRow pokemonSet={pokemonSets[0]} />
   );
 }

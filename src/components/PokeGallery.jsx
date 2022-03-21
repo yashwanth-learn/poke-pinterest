@@ -1,23 +1,21 @@
 import React, { useEffect, useState, useContext } from "react";
-import usePokemon from "../hooks/usePokemon";
-import PokemonContext2 from "../PokemonContext2";
+import PokemonContext from "../PokemonContext";
+import sliceForRows from "../utils/pokeUtils";
+import CardRow from "./CardRow";
 
 export default function PokeGallery() {
-  const [deletedPokemons, setDeletedPokemons] = useState([]);
-  // const {getState, deletePokemon} = usePokemon();
+  const [pokemonSets, setPokemonSets] = useState([]);
+  const { state } = useContext(PokemonContext);
+  console.log("In Poke gallery:", state);
   useEffect(() => {
-    // deletePokemon({name:123});
+    setPokemonSets(sliceForRows(state?.savedPokemons));
   });
-  const { state } = useContext(PokemonContext2);
+
   return (
-    // <PokemonProvider>
     <div>
-      {state?.deletedPokemons?.map(pokemon => {
-        return <img src={pokemon.sprites.other.dream_world.front_default} />;
+      {pokemonSets.map((pokemonSet, index) => {
+        return <CardRow key={index} pokemonSet={pokemonSet} parent="gallery" />;
       })}
-      {/* {deletePokemon({name:123})} */}
-      Its ok, dont worry!
     </div>
-    // </PokemonProvider>
   );
 }

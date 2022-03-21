@@ -1,17 +1,4 @@
-import React, { useState } from "react";
+import { createContext } from "react";
 
-const PokemonContext = React.createContext([{}, () => {}]);
-
-const PokemonProvider = props => {
-  const [state, setState] = useState({
-    deletedPokemons: [],
-    savedPokemons: []
-  });
-  return (
-    <PokemonContext.Provider value={[state, setState]}>
-      {props.children}
-    </PokemonContext.Provider>
-  );
-};
-
-export { PokemonContext, PokemonProvider };
+const PokemonContext = createContext();
+export default PokemonContext;

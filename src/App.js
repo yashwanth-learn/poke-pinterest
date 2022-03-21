@@ -2,19 +2,20 @@ import { useState } from "react";
 import "./App.css";
 import PokeContainer from "./components/PokeContainer";
 import Navigation from "./components/Navigation";
-import PokemonContext2 from "./PokemonContext2";
+import PokemonContext from "./PokemonContext";
 
 function App() {
   const [state, setState] = useState({
     savedPokemons: [],
-    deletedPokemons: []
+    deletedPokemons: [],
+    pokemons:[]
   });
   return (
-    <PokemonContext2.Provider value={{ state, setState }}>
+    <PokemonContext.Provider value={{ state, setState }}>
       <div className="App">
         <Navigation />
       </div>
-    </PokemonContext2.Provider>
+    </PokemonContext.Provider>
   );
 }
 
