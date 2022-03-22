@@ -7,7 +7,7 @@ import PokeContainer from "./PokeContainer";
 export default function Navigation() {
   const [getMore, setGetMore] = useState(false);
   const handleScroll = () => {
-    console.log("inner Height" + window.innerHeight+"scroll Y Height" + window.scrollY + "scroll Height" + document.body.scrollHeight );
+    // console.log("inner Height" + window.innerHeight+"scroll Y Height" + window.scrollY + "scroll Height" + document.body.scrollHeight );
     if (!(window.innerHeight + window.scrollY <= document.body.scrollHeight)) {
       setGetMore(true);
       

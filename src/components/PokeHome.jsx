@@ -12,35 +12,43 @@ export default function PokeHome(props) {
   const scrollableDiv = React.createRef();
 
   const { state, setState } = useContext(PokemonContext);
-  // const handleShowMore = () => {
-  //   fetchPoke();
-  // };
-  const fetchPoke9 = () => {
+  const fetchPoke9 = async () => {
     console.log("Nxt Id in PokeHome:", nxtId);
     for (let i = nxtId; i <= nxtId + 8; i++) {
-      fetchPokemon(i).then(resp => {
-        console.log("In home fetch:", resp);
-        const qwerty = pok;
-        qwerty.push(resp);
-        setPok(qwerty);
-        setState({ ...state, pokemons: pok });
-        setPokemonSets(sliceForRows(pok));
+      await fetchPokemon(i).then(resp => {
+        const newPoks = pok;
+        newPoks.push(resp);
+        setPok(newPoks);
       });
     }
+    const newState = state;
+    newState.pokemons = pok;
+    setState(newState);
+    console.log("state after setting dummy state", state);
+    setPokemonSets(sliceForRows(pok));
     setNxtId(nxtId + 9);
   };
 
-  useEffect(() => {
-    fetchPoke9();
+  useEffect(async () => {
+    console.log("state before fetch in home", state);
+    if((state.pokemons.length === 0) || getMore){
+      await fetchPoke9();
+    }
     if (getMore) {
       setGetMore();
     }
   }, [getMore]);
+
+  useEffect(() => {
+    const updatedPokemons = state.pokemons;
+    setPok(updatedPokemons);
+    setPokemonSets(sliceForRows(updatedPokemons));
+  }, [state]);
   return (
     <div>
       <div ref={scrollableDiv}>
         {pokemonSets.map((pokemonSet, index) => {
-          return <CardRow key={index} pokemonSet={pokemonSet} parent="home"/>;
+          return <CardRow key={index} pokemonSet={pokemonSet} parent="home" />;
         })}
       </div>
       <div>{/* <button onClick={handleShowMore}>show more</button> */}</div>

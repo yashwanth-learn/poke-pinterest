@@ -3,7 +3,7 @@ import PokeCard from "./PokeCard";
 
 export default function CardRow(props) {
   const { pokemonSet, parent } = props;
-  console.log("In card row", pokemonSet);
+  // console.log("In card row", pokemonSet);
   return (
     <div
       style={{
