@@ -26,7 +26,7 @@ export default function PokeCard(props) {
     setState(state => ({ ...state, savedPokemons: updatedSavedPokemons }));
   };
   return (
-    <div className="card">
+    <div className="poke-card">
       <img
         onClick={togglePopup}
         alt={"hello"}
@@ -35,8 +35,12 @@ export default function PokeCard(props) {
       />
 
       <span>
-        <p><b>#{pokemonObj.id}</b></p>
-        <p><b>{pokemonObj.name}</b></p>
+        <p>
+          <b>#{pokemonObj.id}</b>
+        </p>
+        <p>
+          <b>{pokemonObj.name}</b>
+        </p>
       </span>
       <div>
         <button onClick={handleOnSave}>Add to Gallery</button>

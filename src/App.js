@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.css";
-import PokeContainer from "./components/PokeContainer";
 import Navigation from "./components/Navigation";
 import PokemonContext from "./PokemonContext";
 
@@ -8,7 +7,9 @@ function App() {
   const [state, setState] = useState({
     savedPokemons: [],
     deletedPokemons: [],
-    pokemons:[]
+    pokemons: [],
+    nxtId: 1,
+    loggedIn: false
   });
   return (
     <PokemonContext.Provider value={{ state, setState }}>
