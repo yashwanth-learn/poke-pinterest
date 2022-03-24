@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import PokemonContext from "../PokemonContext";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PokeHome from "./PokeHome";
 import PokeGallery from "./PokeGallery";
@@ -14,6 +15,17 @@ import { Link } from "react-router-dom";
 export default function Navigation() {
   const [getMore, setGetMore] = useState(false);
   const [firstTime, setFirstTime] = useState(true);
+  const { state, setState } = useContext(PokemonContext);
+  const backToStart = () => {
+    setState({
+      savedPokemons: [],
+      deletedPokemons: [],
+      pokemons: [],
+      nxtId: 1,
+      loggedIn: false
+    });
+    setFirstTime(true);
+  };
   const handleScroll = () => {
     if (
       !(window.innerHeight + window.scrollY <= document.body.scrollHeight - 60)
@@ -67,7 +79,7 @@ export default function Navigation() {
             </Dialog>
           </div>
         ) : (
-          <PokeContainer setFirstTime={() => setFirstTime(true)} />
+          <PokeContainer backToStart={() => backToStart()} />
         )}
         <Routes>
           <Route

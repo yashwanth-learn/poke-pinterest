@@ -1,20 +1,25 @@
-.MuiCardMedia-img{
-    width: 150px !important;
-    height: 150px;
-    object-fit: contain !important;
-    margin-top: 50px;
+.MuiCardMedia-img {
+  width: 150px !important;
+  height: 150px;
+  object-fit: contain !important;
+  margin-top: 50px;
 }
 
-.muiCard{
-    width: 275px;
-    height: 350px;
-    display: inline-grid;
-    justify-content: center;
-    background: radial-gradient(yellow, transparent);
-    box-shadow: 0px 5px 15px #f44336 !important;
+.muiCard {
+  width: 275px;
+  height: 350px;
+  display: inline-grid;
+  justify-content: center;
+  background: radial-gradient(yellow, transparent);
+  box-shadow: 0px 5px 15px #f44336 !important;
 }
 
-.MuiCardActions-root{
-    display: inline-flex;
-    justify-content: center;
+.MuiCardActions-root {
+  display: inline-flex;
+  justify-content: center;
+}
+
+.likeDisLike {
+  background: none;
+  border: none;
 }

@@ -15,7 +15,6 @@ export default function PokeGallery() {
   const { state } = useContext(PokemonContext);
   const savedPokemons = state?.savedPokemons;
   const showGoHome = !savedPokemons?.length;
-  console.log("In Poke gallery:", showGoHome);
   useEffect(() => {
     setPokemonSets(sliceForRows(savedPokemons));
   }, [savedPokemons]);

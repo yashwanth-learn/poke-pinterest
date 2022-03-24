@@ -6,7 +6,7 @@ import { Divider } from "@mui/material";
 import PokeLogo from "../images/PokeLogo.png";
 
 export default function PokeContainer(props) {
-  const { setFirstTime } = props;
+  const { backToStart } = props;
   return (
     <>
       <div
@@ -17,7 +17,7 @@ export default function PokeContainer(props) {
         }}
       >
         <div style={{ width: "50%" }}>
-          <Link to="/" onClick={setFirstTime}>
+          <Link to="/" onClick={backToStart}>
             <img
               style={{ float: "left" }}
               src={PokeLogo}

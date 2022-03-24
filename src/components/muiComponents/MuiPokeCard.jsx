@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import MuiPokePopup from "./MuiPokePopup";
+import { motion } from "framer-motion";
 import "./MuiPokeCard.css";
 
 export default function MuiPokeCard(props) {
@@ -52,16 +53,32 @@ export default function MuiPokeCard(props) {
         </CardContent>
         {parent === "home" && (
           <CardActions>
-            <Button onClick={handleOnSave} size="small">
+            <motion.button
+              whileHover={{ scale: 1.5 }}
+              whileTap={{ scale: 0.9 }}
+              className={"likeDisLike"}
+              onClick={handleOnSave}
+              size="small"
+            >
               <ThumbUpAltIcon color="primary" />
-            </Button>
-            <Button onClick={handleOnDelete} size="small">
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.5 }}
+              whileTap={{ scale: 0.9 }}
+              className={"likeDisLike"}
+              onClick={handleOnDelete}
+              size="small"
+            >
               <ThumbDownAltIcon color="primary" />
-            </Button>
+            </motion.button>
           </CardActions>
         )}
       </Card>
-      <MuiPokePopup pokeInfo={pokemonObj} handleClose={togglePopup} isOpen={isOpen} />
+      <MuiPokePopup
+        pokeInfo={pokemonObj}
+        handleClose={togglePopup}
+        isOpen={isOpen}
+      />
     </>
   );
 }

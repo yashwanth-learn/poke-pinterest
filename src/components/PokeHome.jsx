@@ -24,12 +24,10 @@ export default function PokeHome(props) {
     newState.pokemons = pok;
     newState.nxtId = nxtId + 9;
     setState(newState);
-    console.log("state after setting dummy state", state);
     setPokemonSets(sliceForRows(pok));
   };
 
   useEffect(async () => {
-    console.log("state before fetch in home", state);
     if (state.pokemons.length === 0 || getMore) {
       await fetchPoke9();
     }

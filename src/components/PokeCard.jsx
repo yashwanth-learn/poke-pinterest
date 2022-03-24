@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import PokemonContext from "../PokemonContext";
 import PokePopup from "./PokePopup";
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import "./PokeCard.css";
 import MuiPokeCard from "./muiComponents/MuiPokeCard";
 import MuiPokePopup from "./muiComponents/MuiPokeCard";
@@ -46,12 +46,18 @@ export default function PokeCard(props) {
           <b>{pokemonObj.name}</b>
         </p>
       </span>
-      <div style={{columnGap:"20px", display:"inline-flex"}}>
-        <button onClick={handleOnSave}><ThumbUpAltIcon color="primary"/></button>
-        <button onClick={handleOnDelete}><ThumbDownAltIcon color="primary"/></button>
+      <div style={{ columnGap: "20px", display: "inline-flex" }}>
+        <button onClick={handleOnSave}>
+          <ThumbUpAltIcon color="error" />
+        </button>
+        <button onClick={handleOnDelete}>
+          <ThumbDownAltIcon color="action" />
+        </button>
       </div>
       {/* {isOpen && <PokePopup pokeInfo={pokemonObj} handleClose={togglePopup} />} */}
-      {isOpen && <MuiPokePopup pokeInfo={pokemonObj} handleClose={togglePopup} />}
+      {isOpen && (
+        <MuiPokePopup pokeInfo={pokemonObj} handleClose={togglePopup} />
+      )}
     </div>
   );
 }

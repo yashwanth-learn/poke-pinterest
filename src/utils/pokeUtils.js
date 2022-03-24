@@ -4,7 +4,6 @@ const sliceForRows = arr => {
     const chunk = arr.slice(i, i + 3);
     res.push(chunk);
   }
-  console.log("Slicing:", res);
   return res;
 };
 
