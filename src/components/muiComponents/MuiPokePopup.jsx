@@ -1,12 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import PokemonContext from "../../PokemonContext";
 import PropTypes from "prop-types";
-import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
@@ -56,7 +54,6 @@ export default function MuiPokePopup(props) {
   const { state } = useContext(PokemonContext);
   const { handleClose, isOpen, pokeInfo } = props;
   const [relatives, setRelatives] = useState([]);
-  const [width, setWidth] = useState("auto");
   useEffect(() => {
     const sameTypePokes = [];
     state.pokemons.map(pokemon => {
@@ -73,7 +70,6 @@ export default function MuiPokePopup(props) {
       }
     });
     setRelatives(sameTypePokes);
-    setWidth("100%");
   }, [pokeInfo]);
   return (
     <div>
@@ -95,17 +91,19 @@ export default function MuiPokePopup(props) {
             <Typography
               variant="button"
               component="h2"
-              sx={{ fontSize: "1.875rem", letterSpacing: "1.0em" }}
+              sx={{ fontSize: "1.875rem", letterSpacing: "0.25em" }}
             >
               {pokeInfo.name}
             </Typography>
           </span>
         </BootstrapDialogTitle>
-        <DialogContent dividers>
+        <DialogContent dividers style={{ display: "contents" }}>
           <Grid style={{ display: "flex", justifyContent: "center" }}>
             <img
               src={pokeInfo?.sprites?.other?.dream_world?.front_default}
               alt={pokeInfo.id}
+              width="200px"
+              height="200px"
             />
           </Grid>
         </DialogContent>
@@ -151,8 +149,13 @@ export default function MuiPokePopup(props) {
             </p>
           </span>
         </Grid>
+        <Grid>
+          <hr />
+          <p>Relatives</p>
+          <hr />
+        </Grid>
         {/* </DialogContent> */}
-        <DialogContent dividers>
+        <DialogContent>
           <Grid
             container
             style={{

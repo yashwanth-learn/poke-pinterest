@@ -3,13 +3,13 @@ import { fetchPokemon } from "../api/fetchPokemons";
 import CardRow from "./CardRow";
 import PokemonContext from "../PokemonContext";
 import sliceForRows from "../utils/pokeUtils";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function PokeHome(props) {
   const { getMore, setGetMore } = props;
   const [pokemonSets, setPokemonSets] = useState([]);
   const [pok, setPok] = useState([]);
   const scrollableDiv = React.createRef();
-
   const { state, setState } = useContext(PokemonContext);
   const fetchPoke9 = async () => {
     const nxtId = state.nxtId;
@@ -50,6 +50,13 @@ export default function PokeHome(props) {
           return <CardRow key={index} pokemonSet={pokemonSet} parent="home" />;
         })}
       </div>
+      <ClipLoader
+        color={"grey"}
+        loading={true}
+        styles={{ display: "block", margin: "2px", borderColor: "red" }}
+        size={60}
+        speedMultiplier={2}
+      />
     </div>
   );
 }

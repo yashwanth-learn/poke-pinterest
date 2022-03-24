@@ -3,7 +3,7 @@ import PokemonContext from "../PokemonContext";
 import "./PokePopup.css";
 
 export default function PokePopup(props) {
-  const { state, setState } = useContext(PokemonContext);
+  const { state } = useContext(PokemonContext);
   const { pokeInfo } = props;
   const [relatives, setRelatives] = useState([]);
   useEffect(() => {

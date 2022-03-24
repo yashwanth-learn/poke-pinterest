@@ -45,7 +45,7 @@ export default function PokeGallery() {
             </DialogContent>
             <DialogActions>
               <Button>
-                <Link to="/">Go to home tab</Link>
+                <Link to="/home">Go to home tab</Link>
               </Button>
             </DialogActions>
           </Dialog>

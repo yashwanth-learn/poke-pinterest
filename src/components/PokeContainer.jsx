@@ -3,33 +3,42 @@ import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import { Divider } from "@mui/material";
-import LogoutIcon from "@mui/icons-material/Logout";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import PokeLogo from "../images/PokeLogo.png";
 
-export default function PokeContainer() {
+export default function PokeContainer(props) {
+  const { setFirstTime } = props;
   return (
     <>
-      <div style={{ height: "40px", backgroundColor: "yellow" }}>
-        <div>
-          <div style={{ float: "right", marginRight: "5px", columnGap: "5px" }}>
-            <AccountCircleIcon color="success" fontSize="large" />
-            <Link to="/">
-              <LogoutIcon color="success" fontSize="large" />
-            </Link>
-          </div>
-        </div>
-      </div>
-      <div style={{ width: "100%", display: "inline-flex" }}>
+      <div
+        style={{
+          backgroundColor: "yellow",
+          width: "100%",
+          display: "inline-flex"
+        }}
+      >
         <div style={{ width: "50%" }}>
-          <button style={{ float: "right", marginRight: "5px" }}>
-            <Link to="/">
+          <Link to="/" onClick={setFirstTime}>
+            <img
+              style={{ float: "left" }}
+              src={PokeLogo}
+              width={150}
+              height={50}
+              alt="logo"
+            />
+          </Link>
+          <button
+            style={{ float: "right", marginRight: "5px", marginTop: "2px" }}
+          >
+            <Link to="/home">
               <HomeIcon color="primary" fontSize="large" />
             </Link>
           </button>
         </div>
         <Divider orientation="vertical" flexItem />
         <div style={{ width: "50%" }}>
-          <button style={{ float: "left", marginLeft: "5px" }}>
+          <button
+            style={{ float: "left", marginLeft: "5px", marginTop: "2px" }}
+          >
             <Link to="/gallery">
               <CollectionsIcon color="primary" fontSize="large" />
             </Link>
